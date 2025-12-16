@@ -1,0 +1,7 @@
+streamlit
+pandas
+plotly
+pyarrow
+requests
+databricks-sdk>=0.29.0
+databricks-sql-connector
