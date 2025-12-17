@@ -1,5 +1,7 @@
 # LAPD Crime Data Analysis & Dashboard
 
+TEAM : Marta Samoilenko, Anna Yaremko, Anastasia Pelekh, Bohdan Pavliuk
+
 This project is an end-to-end data engineering and visualization solution that analyzes crime data from the Los Angeles Police Department (LAPD). It utilizes a **Databricks Medallion Architecture** (Bronze/Silver/Gold) for data processing and a **Streamlit** application for interactive exploration.
 
 ## Project Overview
@@ -72,4 +74,64 @@ Located in `lapd-crime-app/`, this application connects to the Databricks SQL Wa
 │       ├── queries.py            # SQL Query repository
 │       └── ui.py                 # UI components
 └── README.md
+```
 
+## App Setup & Deployment Tutorial (if running localy)
+1. Environment Setup
+
+Navigate to the app directory and create a virtual environment:
+```sh
+cd lapd-crime-app
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+```
+
+2. Install Dependencies
+```sh
+pip install -r requirements.txt
+```
+
+3 .Configure Credentials
+
+The app needs to connect to your Databricks SQL Warehouse. You must set environment variables to authenticate.
+
+Linux/Mac:
+```sh
+export DATABRICKS_HOST="https://<your-workspace-id>.cloud.databricks.com"
+export DATABRICKS_TOKEN="dapi..."  # Your Personal Access Token
+export DATABRICKS_WAREHOUSE_ID="<your-sql-warehouse-id>"
+# Optional: Only if you have a Genie Space set up
+export GENIE_SPACE_ID="<your-genie-space-id>"
+```
+
+Windows (PowerShell):
+```sh
+$env:DATABRICKS_HOST="https://<your-workspace-id>.cloud.databricks.com"
+$env:DATABRICKS_TOKEN="dapi..."
+$env:DATABRICKS_WAREHOUSE_ID="<your-sql-warehouse-id>"
+```
+
+4. Run the app
+```sh
+streamlit run app.py
+```
+
+## Deploying to Databricks Apps
+
+This repository includes an app.yaml configuration file tailored for Databricks Apps.
+
+1. Prepare Resources
+
+   - Ensure you have the following resources created in your Databricks Workspace:
+   - SQL Warehouse: An active Serverless or Pro SQL Warehouse.
+   - Genie Space (Optional): If you want to use the AI chat feature.
+
+2. Deploy via Databricks UI
+
+   - Navigate to Compute -> Apps in your Databricks workspace.
+   - Click Create App.
+   - Link your repository (`https://github.com/Drakonchyk/lapd-data-analysis`).
+   - In the configuration, map the resources defined in app.yaml:
+   - Map sql-warehouse to your actual SQL Warehouse.
+   - Map genie-space to your Genie Space (if available).
+   - Click `Deploy`.
